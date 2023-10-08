@@ -7,7 +7,15 @@
 
 #define SYS_FREQ		8000000
 #define APB1_CLK		SYS_FREQ
-#define UART_BAUDRATE	19200
+
+#ifndef UART_BAUDRATE
+#define UART_BAUDRATE	115200
+#endif
+
+#if UART_BAUDRATE < 1
+#error <define positive boundrate>
+#endif
+
 
 void uart2_tx_init(void);
 void uart2_rxtx_init(void);

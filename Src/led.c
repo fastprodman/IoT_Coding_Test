@@ -1,8 +1,5 @@
 #include "led.h"
 
-#define LED_PIN0 9
-#define LED_PIN1 10
-
 #if LED_PIN0 < 9 || LED_PIN0 > 12
 #error <choose led pin between 9 and 12>
 #endif
@@ -27,12 +24,12 @@ void led_init(void){
 
 void led_off(uint8_t led_id){
 	if (led_id == 0){
-		GPIOA->ODR &=~ GPIO_ODR_ODR9;
+		GPIOA->ODR &=~ (0x1UL << LED_PIN0);
 		write_str("led_off: 0\r\n", 12);
 	}
 
 	if (led_id == 1){
-		GPIOA->ODR &=~ GPIO_ODR_ODR10;
+		GPIOA->ODR &=~ (0x1UL << LED_PIN1);
 		write_str("led_off: 1\r\n", 12);
 	}
 }
@@ -40,12 +37,12 @@ void led_off(uint8_t led_id){
 void led_on(uint8_t led_id, uint16_t time_ms){
 
 	if (led_id == 0){
-		GPIOA->ODR |= GPIO_ODR_ODR9;
+		GPIOA->ODR |= (0x1UL << LED_PIN0);
 		tim2_start(time_ms);
 	}
 
 	if (led_id == 1){
-		GPIOA->ODR |= GPIO_ODR_ODR10;
+		GPIOA->ODR |= (0x1UL << LED_PIN1);
 		tim3_start(time_ms);
 	}
 }

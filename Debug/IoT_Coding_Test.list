@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_rnglists 0000016d  00000000  00000000  00022470  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00011c2d  00000000  00000000  000225dd  2**0
+ 17 .debug_macro  00011c27  00000000  00000000  000225dd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00002f9a  00000000  00000000  0003420a  2**0
+ 18 .debug_line   00002f9a  00000000  00000000  00034204  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00058bfe  00000000  00000000  000371a4  2**0
+ 19 .debug_str    00058bff  00000000  00000000  0003719e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  000010ec  00000000  00000000  0008fda4  2**2
+ 20 .debug_frame  000010ec  00000000  00000000  0008fda0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000066  00000000  00000000  00090e90  2**0
+ 21 .debug_line_str 00000066  00000000  00000000  00090e8c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -438,26 +438,26 @@ void led_init(void){
  800036c:	4b0e      	ldr	r3, [pc, #56]	; (80003a8 <led_init+0x4c>)
  800036e:	685b      	ldr	r3, [r3, #4]
  8000370:	4a0d      	ldr	r2, [pc, #52]	; (80003a8 <led_init+0x4c>)
- 8000372:	f023 03c0 	bic.w	r3, r3, #192	; 0xc0
+ 8000372:	f423 4340 	bic.w	r3, r3, #49152	; 0xc000
  8000376:	6053      	str	r3, [r2, #4]
 	GPIOA->CRH |= (2U << ((LED_PIN0-8)*4));//4
  8000378:	4b0b      	ldr	r3, [pc, #44]	; (80003a8 <led_init+0x4c>)
  800037a:	685b      	ldr	r3, [r3, #4]
  800037c:	4a0a      	ldr	r2, [pc, #40]	; (80003a8 <led_init+0x4c>)
- 800037e:	f043 0320 	orr.w	r3, r3, #32
+ 800037e:	f443 5300 	orr.w	r3, r3, #8192	; 0x2000
  8000382:	6053      	str	r3, [r2, #4]
 
 	GPIOA->CRH &=~ (3U << ((LED_PIN1-8)*4+2));//10
  8000384:	4b08      	ldr	r3, [pc, #32]	; (80003a8 <led_init+0x4c>)
  8000386:	685b      	ldr	r3, [r3, #4]
  8000388:	4a07      	ldr	r2, [pc, #28]	; (80003a8 <led_init+0x4c>)
- 800038a:	f423 6340 	bic.w	r3, r3, #3072	; 0xc00
+ 800038a:	f423 2340 	bic.w	r3, r3, #786432	; 0xc0000
  800038e:	6053      	str	r3, [r2, #4]
 	GPIOA->CRH |= (2U << ((LED_PIN1-8)*4));//8
  8000390:	4b05      	ldr	r3, [pc, #20]	; (80003a8 <led_init+0x4c>)
  8000392:	685b      	ldr	r3, [r3, #4]
  8000394:	4a04      	ldr	r2, [pc, #16]	; (80003a8 <led_init+0x4c>)
- 8000396:	f443 7300 	orr.w	r3, r3, #512	; 0x200
+ 8000396:	f443 3300 	orr.w	r3, r3, #131072	; 0x20000
  800039a:	6053      	str	r3, [r2, #4]
 }
  800039c:	bf00      	nop
@@ -479,11 +479,11 @@ void led_off(uint8_t led_id){
  80003b6:	79fb      	ldrb	r3, [r7, #7]
  80003b8:	2b00      	cmp	r3, #0
  80003ba:	d109      	bne.n	80003d0 <led_off+0x24>
-		GPIOA->ODR &=~ GPIO_ODR_ODR9;
+		GPIOA->ODR &=~ (0x1UL << LED_PIN0);
  80003bc:	4b0d      	ldr	r3, [pc, #52]	; (80003f4 <led_off+0x48>)
  80003be:	68db      	ldr	r3, [r3, #12]
  80003c0:	4a0c      	ldr	r2, [pc, #48]	; (80003f4 <led_off+0x48>)
- 80003c2:	f423 7300 	bic.w	r3, r3, #512	; 0x200
+ 80003c2:	f423 6300 	bic.w	r3, r3, #2048	; 0x800
  80003c6:	60d3      	str	r3, [r2, #12]
 		write_str("led_off: 0\r\n", 12);
  80003c8:	210c      	movs	r1, #12
@@ -495,11 +495,11 @@ void led_off(uint8_t led_id){
  80003d0:	79fb      	ldrb	r3, [r7, #7]
  80003d2:	2b01      	cmp	r3, #1
  80003d4:	d109      	bne.n	80003ea <led_off+0x3e>
-		GPIOA->ODR &=~ GPIO_ODR_ODR10;
+		GPIOA->ODR &=~ (0x1UL << LED_PIN1);
  80003d6:	4b07      	ldr	r3, [pc, #28]	; (80003f4 <led_off+0x48>)
  80003d8:	68db      	ldr	r3, [r3, #12]
  80003da:	4a06      	ldr	r2, [pc, #24]	; (80003f4 <led_off+0x48>)
- 80003dc:	f423 6380 	bic.w	r3, r3, #1024	; 0x400
+ 80003dc:	f423 5380 	bic.w	r3, r3, #4096	; 0x1000
  80003e0:	60d3      	str	r3, [r2, #12]
 		write_str("led_off: 1\r\n", 12);
  80003e2:	210c      	movs	r1, #12
@@ -532,11 +532,11 @@ void led_on(uint8_t led_id, uint16_t time_ms){
  8000410:	79fb      	ldrb	r3, [r7, #7]
  8000412:	2b00      	cmp	r3, #0
  8000414:	d109      	bne.n	800042a <led_on+0x2a>
-		GPIOA->ODR |= GPIO_ODR_ODR9;
+		GPIOA->ODR |= (0x1UL << LED_PIN0);
  8000416:	4b0d      	ldr	r3, [pc, #52]	; (800044c <led_on+0x4c>)
  8000418:	68db      	ldr	r3, [r3, #12]
  800041a:	4a0c      	ldr	r2, [pc, #48]	; (800044c <led_on+0x4c>)
- 800041c:	f443 7300 	orr.w	r3, r3, #512	; 0x200
+ 800041c:	f443 6300 	orr.w	r3, r3, #2048	; 0x800
  8000420:	60d3      	str	r3, [r2, #12]
 		tim2_start(time_ms);
  8000422:	88bb      	ldrh	r3, [r7, #4]
@@ -548,11 +548,11 @@ void led_on(uint8_t led_id, uint16_t time_ms){
  800042a:	79fb      	ldrb	r3, [r7, #7]
  800042c:	2b01      	cmp	r3, #1
  800042e:	d109      	bne.n	8000444 <led_on+0x44>
-		GPIOA->ODR |= GPIO_ODR_ODR10;
+		GPIOA->ODR |= (0x1UL << LED_PIN1);
  8000430:	4b06      	ldr	r3, [pc, #24]	; (800044c <led_on+0x4c>)
  8000432:	68db      	ldr	r3, [r3, #12]
  8000434:	4a05      	ldr	r2, [pc, #20]	; (800044c <led_on+0x4c>)
- 8000436:	f443 6380 	orr.w	r3, r3, #1024	; 0x400
+ 8000436:	f443 5380 	orr.w	r3, r3, #4096	; 0x1000
  800043a:	60d3      	str	r3, [r2, #12]
 		tim3_start(time_ms);
  800043c:	88bb      	ldrh	r3, [r7, #4]
@@ -567,7 +567,7 @@ void led_on(uint8_t led_id, uint16_t time_ms){
  800044c:	40010800 	.word	0x40010800
 
 08000450 <main>:
-char key;
+
 
 
 
