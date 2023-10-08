@@ -22,8 +22,6 @@ void uart2_rxtx_init(void);
 char uart_read(USART_TypeDef *UARTx);
 void uart_write(USART_TypeDef *UARTx, int ch);
 void write_str(char* ch_arr, uint16_t size);
-
-
-
+void uart2_rxtx_interrupt_init(void);
 
 #endif /* UART_H_ */

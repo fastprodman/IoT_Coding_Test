@@ -3,11 +3,11 @@
 int isStringAllDigits(const char *str) {
     while (*str) {
         if (*str < '0' || *str > '9') {
-            return 1; // Not all characters are digits
+            return 1;
         }
         str++;
     }
-    return 0; // All characters are digits
+    return 0;
 }
 
 uint8_t call_echo(char *str, uint16_t len){
@@ -28,10 +28,14 @@ uint8_t call_echo(char *str, uint16_t len){
 		return 1;
 	}
 
+	if(len < 0 || len >= 310){
+		return 1;
+	}
+
 	arr = strtok(NULL, "\r");
 
 	write_str("data: ", 6);
-	if(chr_count != 0){
+	if(chr_count != 0&&len != 0){
 		write_str(arr, len-9);
 	}
 	write_str("\r\n", 2);
@@ -84,11 +88,6 @@ void write_ok(void){
 }
 
 void parse_string(char *str, uint16_t len){
-//	uint8_t delim = 0;
-//	while(!(str[delim]==' '||delim==len||delim>7)){
-//		delim++;
-//	}
-
 	if(!strncmp(str, "echo", 4)){
 		if(call_echo(str, len)){
 			write_error();
@@ -108,23 +107,4 @@ void parse_string(char *str, uint16_t len){
 	}
 
 	write_error();
-
-//	str = (str+delim);
-//	len=len-delim;
-//	delim=0;
-//
-//	while(!(str[delim]==','||delim==len)){
-//		delim++;
-//	}
-//	write_str(str, delim);
-//
-//	str = (str+delim);
-//	len=len-delim;
-//	delim=0;
-//
-//	while(!(str[delim]=='\r'||delim==len)){
-//		delim++;
-//	}
-//	write_str(str, delim);
-
 }

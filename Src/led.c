@@ -3,11 +3,11 @@
 void led_init(void){
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
 
-	GPIOA->CRH &=~ (3U << ((LED_PIN0-8)*4+2));//6
-	GPIOA->CRH |= (2U << ((LED_PIN0-8)*4));//4
+	GPIOA->CRH &=~ (3U << ((LED_PIN0-8)*4+2));
+	GPIOA->CRH |= (2U << ((LED_PIN0-8)*4));
 
-	GPIOA->CRH &=~ (3U << ((LED_PIN1-8)*4+2));//10
-	GPIOA->CRH |= (2U << ((LED_PIN1-8)*4));//8
+	GPIOA->CRH &=~ (3U << ((LED_PIN1-8)*4+2));
+	GPIOA->CRH |= (2U << ((LED_PIN1-8)*4));
 }
 
 void led_off(uint8_t led_id){
