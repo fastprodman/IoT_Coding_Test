@@ -1,6 +1,6 @@
 ../Src/command_parser.c:3:5:isStringAllDigits	16	static
 ../Src/command_parser.c:13:9:call_echo	24	static
-../Src/command_parser.c:43:9:call_set_led	24	static
-../Src/command_parser.c:79:6:write_error	8	static
-../Src/command_parser.c:83:6:write_ok	8	static
-../Src/command_parser.c:87:6:parse_string	16	static
+../Src/command_parser.c:42:9:call_set_led	24	static
+../Src/command_parser.c:78:6:write_error	8	static
+../Src/command_parser.c:82:6:write_ok	8	static
+../Src/command_parser.c:86:6:parse_string	16	static

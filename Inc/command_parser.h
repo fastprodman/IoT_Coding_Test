@@ -7,6 +7,6 @@
 #include "uart.h"
 #include "led.h"
 
-void parse_string(char *str, uint8_t len);
+void parse_string(char *str, uint16_t len);
 
 #endif /* COMMAND_PARSER_H_ */

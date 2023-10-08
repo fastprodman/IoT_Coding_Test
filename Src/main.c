@@ -15,14 +15,14 @@ int main(void){
 	uart2_rxtx_init();
 	led_init();
 
-	char arr_rx[30];
-	uint8_t arr_last = 0;
+	char arr_rx[310];
+	uint16_t arr_last = 0;
 
 	while(1){
 		key = uart_read(USART2);
 		arr_rx[arr_last] = key;
 		arr_last++;
-		if(key=='\r'){
+		if(key=='\r'||arr_last==310){
 
 			parse_string(arr_rx, arr_last);
 

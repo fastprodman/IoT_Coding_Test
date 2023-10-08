@@ -10,11 +10,10 @@ int isStringAllDigits(const char *str) {
     return 0; // All characters are digits
 }
 
-uint8_t call_echo(char *str){
+uint8_t call_echo(char *str, uint16_t len){
 
 	char *arr;
 	uint8_t chr_count;
-	uint16_t time_ms;
 
 	arr = strtok(str, " ");
 	arr = strtok(NULL, ",");
@@ -33,7 +32,7 @@ uint8_t call_echo(char *str){
 
 	write_str("data: ", 6);
 	if(chr_count != 0){
-		write_str(arr, sizeof(arr));
+		write_str(arr, len-9);
 	}
 	write_str("\r\n", 2);
 
@@ -84,14 +83,14 @@ void write_ok(void){
 	write_str("OK\r\n", 4);
 }
 
-void parse_string(char *str, uint8_t len){
+void parse_string(char *str, uint16_t len){
 //	uint8_t delim = 0;
 //	while(!(str[delim]==' '||delim==len||delim>7)){
 //		delim++;
 //	}
 
 	if(!strncmp(str, "echo", 4)){
-		if(call_echo(str)){
+		if(call_echo(str, len)){
 			write_error();
 		}else{
 			write_ok();

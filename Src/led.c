@@ -1,17 +1,5 @@
 #include "led.h"
 
-#if LED_PIN0 < 9 || LED_PIN0 > 12
-#error <choose led pin between 9 and 12>
-#endif
-
-#if LED_PIN1 < 9 || LED_PIN1 > 12
-#error <choose led pin between 9 and 12>
-#endif
-
-#if LED_PIN0 == LED_PIN1
-#error <choose different led pins>
-#endif
-
 void led_init(void){
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
 
