@@ -1,0 +1,6 @@
+../Src/command_parser.c:3:5:isStringAllDigits	4
+../Src/command_parser.c:13:9:call_echo	3
+../Src/command_parser.c:43:9:call_set_led	7
+../Src/command_parser.c:79:6:write_error	1
+../Src/command_parser.c:83:6:write_ok	1
+../Src/command_parser.c:87:6:parse_string	5
